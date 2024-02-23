@@ -3,10 +3,18 @@ import { Link } from 'react-router-dom'
 
 export const MainMenu = () => {
   return (
-    <nav>
-        <ul>
-            <li><Link to="/" >Home</Link></li>
-            <li><Link to="/products" >Products</Link></li>
+    <nav className='w-full'>
+        <ul className='flex justify-end text-gray-100'>
+            <li className='flex items-center'>
+                <Link className='menu-item' to="/" >
+                    Home
+                </Link>
+            </li>
+            <li className='flex items-center'>
+                <Link className='menu-item' to="/products" >
+                    Products
+                </Link>
+            </li>
         </ul>
     </nav>
   )
