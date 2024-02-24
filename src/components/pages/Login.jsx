@@ -53,7 +53,7 @@ export const Login = () => {
             Log in
           </button>
           <Link className="text-gray-500" to="/registro">
-            Register?
+            Create your account?
           </Link>
         </div>
         {error && (
