@@ -1,44 +1,39 @@
-import axios from 'axios'
-import { useState} from 'react'
-import { API_URL } from '../../constants/env'
-import { setToken } from '../../helpers/auth'
-import { Link, useNavigate } from 'react-router-dom'
-import LoginTemplate from '../templates/LoginTemplate'
+import axios from "axios"
+import { useState } from "react"
+import { API_URL } from "../../constants/env"
+import { setToken } from "../../helpers/auth"
+import { Link, useNavigate } from "react-router-dom"
+import LoginTemplate from "../templates/LoginTemplate"
 
 export const Login = () => {
-    const nav = useNavigate()
+  const nav = useNavigate()
 
-    const [error, setError] = useState()
+  const [error, setError] = useState()
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        setError()
-        
-        const data = {
-            email: e.target.email.value,
-            password: e.target.password.value,
-        }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setError()
 
-        axios
-            .post(`${API_URL}/public/login`, data)
-            .then((resp) => {
-                setToken(resp.data.data.token)
-                nav("/")
-            })
-            .catch((err) => {
-                setError(err)
-            })
+    const data = {
+      email: e.target.email.value,
+      password: e.target.password.value,
     }
+
+    axios
+      .post(`${API_URL}/public/login`, data)
+      .then((resp) => {
+        setToken(resp.data.data.token)
+        nav("/")
+      })
+      .catch((err) => {
+        setError(err)
+      })
+  }
   return (
     <LoginTemplate title="Log to account">
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <input
-            type="email"
-            placeholder="Email"
-            name="email"
-            required
-          />
+          <input type="email" placeholder="Email" name="email" required />
         </div>
         <div className="mb-4">
           <input

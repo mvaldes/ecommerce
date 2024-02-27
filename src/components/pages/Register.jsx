@@ -33,20 +33,10 @@ const Register = () => {
     <LoginTemplate title="Create your account">
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <input
-            type="text"
-            placeholder="Full name"
-            name="fullname"
-            required
-          />
+          <input type="text" placeholder="Full name" name="fullname" required />
         </div>
         <div className="mb-4">
-          <input
-            type="email"
-            placeholder="Email"
-            name="email"
-            required
-          />
+          <input type="email" placeholder="Email" name="email" required />
         </div>
         <div className="mb-4">
           <input

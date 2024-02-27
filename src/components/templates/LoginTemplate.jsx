@@ -15,10 +15,10 @@ const LoginTemplate = ({ children, title }) => {
                         alt="logo"
                       />
                       <h4 className="text-xl font-semibold mt-1 mb-8 pb-1">
-                        { title }
+                        {title}
                       </h4>
                     </div>
-                    { children }
+                    {children}
                   </div>
                 </div>
                 <div className="bg-gradient lg:w-6/12 flex items-center lg:rounded-r-lg rounded-b-lg lg:rounded-bl-none">
@@ -26,7 +26,9 @@ const LoginTemplate = ({ children, title }) => {
                     <span className="text-xl font-semibold mb-6">
                       More than a store
                     </span>
-                    <h4 className="text-4xl">We are an online store for what you need</h4>
+                    <h4 className="text-4xl">
+                      We are an online store for what you need
+                    </h4>
                   </div>
                 </div>
               </div>
