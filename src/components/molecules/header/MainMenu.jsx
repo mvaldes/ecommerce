@@ -30,15 +30,22 @@ export const MainMenu = () => {
             </Link>
           </li>
         ) : (
-          <li className="flex items-center">
-            <a
-              onClick={handleSession}
-              className="menu-item cursor-pointer"
-              href=""
-            >
-              Sign out
-            </a>
-          </li>
+          <>
+            <li className="flex items-center">
+              <Link className="menu-item" to="/admin/products">
+                Admin products
+              </Link>
+            </li>
+            <li className="flex items-center">
+              <a
+                onClick={handleSession}
+                className="menu-item cursor-pointer"
+                href=""
+              >
+                Sign out
+              </a>
+            </li>
+          </>
         )}
       </ul>
     </nav>

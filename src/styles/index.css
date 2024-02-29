@@ -42,7 +42,7 @@ table {
 }
 
 thead {
-	@apply uppercase bg-sky-700 text-white;
+	@apply uppercase text-white bg-gradient;
 }
 
 th,
