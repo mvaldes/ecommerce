@@ -9,6 +9,8 @@ import { Form } from "../components/pages/admin/products/Form"
 import Table from "../components/pages/admin/products/Table"
 import Admin from "../components/templates/Admin"
 import { Sales } from "../components/pages/admin/Sales"
+import { Product } from "../components/pages/Product"
+import Cart from "../components/pages/Cart"
 
 const router = createBrowserRouter([
   {
@@ -24,6 +26,14 @@ const router = createBrowserRouter([
         path: "/products",
         element: <Products />,
       },
+      {
+        path: "/products/:id",
+        element: <Product />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
+      },
     ],
   },
   {
@@ -34,18 +44,6 @@ const router = createBrowserRouter([
     path: "/create",
     element: <Register />,
   },
-  // {
-  //   path: "/admin/products/create",
-  //   element: <Form />,
-  // },
-  // {
-  //   path: "/admin/products",
-  //   element: <Table />,
-  // },
-  // {
-  //   path: "/admin/products/edit/:id",
-  //   element: <Form />,
-  // },
   {
     path: "/admin",
     element: <Admin />,
@@ -63,7 +61,7 @@ const router = createBrowserRouter([
         element: <Form />,
       },
       {
-        path: "/admin/productos/edit/:id",
+        path: "/admin/products/edit/:id",
         element: <Form />,
       },
     ],

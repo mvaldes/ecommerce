@@ -11,7 +11,7 @@ const LoginTemplate = ({ children, title }) => {
                     <div className="text-center">
                       <img
                         className="mx-auto w-48 mb-4 pt-4"
-                        src="https://ed.team/images/logo/logo.svg"
+                        src="https://thumbs.dreamstime.com/z/car-logo-white-background-97122684.jpg?ct=jpeg"
                         alt="logo"
                       />
                       <h4 className="text-xl font-semibold mt-1 mb-8 pb-1">

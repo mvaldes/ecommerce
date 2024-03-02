@@ -1,12 +1,14 @@
 import axios from "axios"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { API_URL } from "../../constants/env"
 import { setToken } from "../../helpers/auth"
 import { Link, useNavigate } from "react-router-dom"
 import LoginTemplate from "../templates/LoginTemplate"
+import { UserContext } from "../../context/UserContext"
 
 export const Login = () => {
   const nav = useNavigate()
+  const { setUserData } = useContext(UserContext)
 
   const [error, setError] = useState()
 
@@ -23,6 +25,7 @@ export const Login = () => {
       .post(`${API_URL}/public/login`, data)
       .then((resp) => {
         setToken(resp.data.data.token)
+        setUserData(resp.data.data.user)
         nav("/")
       })
       .catch((err) => {
@@ -47,7 +50,7 @@ export const Login = () => {
           <button className="bg-gradient w-full" type="submit">
             Log in
           </button>
-          <Link className="text-gray-500" to="/registro">
+          <Link className="text-gray-500" to="/create">
             Create your account?
           </Link>
         </div>
