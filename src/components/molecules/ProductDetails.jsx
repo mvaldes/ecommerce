@@ -6,7 +6,7 @@ const ProductDetails = ({ details, isNew }) => {
 
   return (
     <div>
-      <h2 className="text-xl font-semibold mb-2">Detalles del producto</h2>
+      <h2 className="text-xl font-semibold mb-2">Product Details</h2>
       <div className="rounded-lg bg-slate-100 grid grid-cols-3 gap-5 p-5">
         {features.map((detail) => {
           const [key, value] = detail
@@ -17,8 +17,8 @@ const ProductDetails = ({ details, isNew }) => {
           return <ProductDetailItem type={type} value={value} key={type} />
         })}
         <ProductDetailItem
-          type="Condición del producto"
-          value={isNew ? "Nuevo" : "Usado"}
+          type="Product condition"
+          value={isNew ? "New" : "Used"}
         />
       </div>
     </div>

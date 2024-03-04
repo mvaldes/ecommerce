@@ -12,5 +12,5 @@ export const formatRating = (rating) => {
 
 export const getInstallments = (price, number) => {
   const monthPrice = price / 12
-  return `${number} x ${formatPrice(monthPrice)} sin interés`
+  return `${number} x ${formatPrice(monthPrice)} no interest`
 }

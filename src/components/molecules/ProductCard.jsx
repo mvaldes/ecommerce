@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { formatPrice } from "../../helpers/number"
-import AddCircleIcon from "@mui/icons-material/AddCircle"
-import RemoveCircleIcon from "@mui/icons-material/RemoveCircle"
+import { MdAddCircle } from "react-icons/md"
+import { MdOutlineRemoveCircle } from "react-icons/md"
 import Button from "@mui/material/Button"
 import { useContext } from "react"
 import { CartContext } from "../../context/CartContext"
@@ -65,7 +65,7 @@ const ProductCard = ({ product }) => {
             onClick={addToCart}
             variant="contained"
             sx={styleObj}
-            startIcon={<AddCircleIcon />}
+            startIcon={<MdAddCircle />}
           >
             Add to cart
           </Button>
@@ -74,7 +74,7 @@ const ProductCard = ({ product }) => {
             onClick={removeFromCart}
             variant="contained"
             sx={styleObj}
-            startIcon={<RemoveCircleIcon />}
+            startIcon={<MdOutlineRemoveCircle />}
           >
             Delete from cart
           </Button>

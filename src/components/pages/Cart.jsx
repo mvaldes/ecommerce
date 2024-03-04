@@ -1,40 +1,42 @@
 // import axios from "axios"
-// import { useState } from "react"
+import { useState } from "react"
 import { useContext } from "react"
 import { Link } from "react-router-dom"
 // import { API_URL } from "../../constants/env"
 import { CartContext } from "../../context/CartContext"
-// import { token } from "../../helpers/auth"
+import { token } from "../../helpers/auth"
 import SummaryItem from "../atoms/SummaryItem"
-// import PayPalPayment from "../organisms/PayPalPayment"
+import axios from "axios"
+import { API_URL } from "../../constants/env"
+import PayPalPayment from "../organisms/PayPalPayment"
 
 function Cart() {
   const { state } = useContext(CartContext)
-  // const [order, setOrder] = useState()
+  const [order, setOrder] = useState()
 
   let value = 0
   state.cart.forEach((c) => (value += c.price))
 
   const handleOrder = () => {
-    // const products = state.cart.map((p) => {
-    //   return {
-    //     product_id: p.id,
-    //     amount: 1,
-    //     unit_price: p.price,
-    //   }
-    // })
-    // const data = {
-    //   products,
-    // }
-    // axios
-    //   .post(`${API_URL}/private/purchase-orders`, data, {
-    //     headers: {
-    //       Authorization: `Bearer ${token()}`,
-    //     },
-    //   })
-    //   .then((resp) => {
-    //     setOrder(resp.data.data)
-    //   })
+    const products = state.cart.map((product) => {
+      return {
+        product_id: product.id,
+        amount: 1, // can be better if add more than 1 of the same product
+        unit_price: product.price,
+      }
+    })
+    const data = {
+      products,
+    }
+    axios
+      .post(`${API_URL}/private/purchase-orders`, data, {
+        headers: {
+          Authorization: `Bearer ${token()}`,
+        },
+      })
+      .then((resp) => {
+        setOrder(resp.data.data)
+      })
   }
 
   return (
@@ -49,16 +51,16 @@ function Cart() {
                   <SummaryItem key={prod.id} product={prod} />
                 ))}
               </div>
-              {/* {!order ? ( */}
-              <button className="bg-gradient" onClick={handleOrder}>
-                Order
-              </button>
-              {/* // ) : (
-              //   <>
-              //     <p>Order id: {order.id}</p>
-              //     <PayPalPayment value={value} order={order} />
-              //   </>
-              // )} */}
+              {!order ? (
+                <button className="bg-gradient" onClick={handleOrder}>
+                  Order
+                </button>
+              ) : (
+                <>
+                  <p>Order id: {order.id}</p>
+                  <PayPalPayment value={value} order={order} />
+                </>
+              )}
             </div>
           ) : (
             <>

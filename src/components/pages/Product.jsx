@@ -1,71 +1,85 @@
-import axios from "axios"
-import React, { useContext, useEffect, useState } from "react"
+import { useContext } from "react"
 import { useParams } from "react-router-dom"
-import { API_URL } from "../../constants/env"
 import { CartContext } from "../../context/CartContext"
-import AddCircleIcon from "@mui/icons-material/AddCircle"
-import RemoveCircleIcon from "@mui/icons-material/RemoveCircle"
-import Button from "@mui/material/Button"
+import useFetch from "../../hooks/useFetch"
+import Badge from "../atoms/Badge"
+import BuyButton from "../atoms/BuyButton"
+import Loader from "../atoms/Loader"
+import ProductRating from "../atoms/ProductRating"
+import PriceDetails from "../molecules/PriceDetails"
+import ProductDetails from "../molecules/ProductDetails"
+import ProductInformation from "../molecules/ProductInformation"
+import RelatedProducts from "../molecules/RelatedProducts"
+import ShareProduct from "../molecules/ShareProduct"
 
 export const Product = () => {
-  const params = useParams()
   const { state, dispatch } = useContext(CartContext)
+  const params = useParams()
+  const { data, loading, error } = useFetch(`public/products/${params.id}`)
 
-  const [product, setProduct] = useState({})
+  if (loading) return <Loader />
+  if (error) return <div>{error?.message}</div>
 
-  useEffect(() => {
-    axios.get(`${API_URL}/public/products/${params.id}`).then((resp) => {
-      setProduct(resp.data.data)
-    })
-  })
-
-  const addToCart = () => {
-    dispatch({
-      type: "ADD_TO_CART",
-      payload: product,
-    })
-  }
-
-  const removeFromCart = () => {
-    dispatch({
-      type: "REMOVE_FROM_CART",
-      payload: product,
-    })
-  }
-
-  const styleObj = {
-    "&:hover": {
-      backgroundColor: "#D93131",
-    },
-    "&:active": {
-      backgroundColor: "#BB261D",
-    },
-    backgroundColor: "#BB261D",
-  }
+  const { rating, sold, isNew, hasDelivery } = data.features.stats
 
   return (
-    <div>
-      <h1 className="text-3xl">Product: {product?.product_name}</h1>
-      <p>{JSON.stringify(product)}</p>
-      {!state.cart.find((c) => c.id === product.id) ? (
-        <Button
-          onClick={addToCart}
-          variant="contained"
-          sx={styleObj}
-          startIcon={<AddCircleIcon />}
-        >
-          Add to cart
-        </Button>
-      ) : (
-        <Button
-          onClick={removeFromCart}
-          variant="contained"
-          sx={styleObj}
-          startIcon={<RemoveCircleIcon />}
-        >
-          Delete from cart
-        </Button>
-      )}
+    <div className="max-w-256 m-auto">
+      <section className="py-10">
+        <div className="grid grid-cols-2 gap-6">
+          <div>
+            <div className="rounded-lg overflow-hidden mb-5">
+              <img
+                className="align-middle"
+                src={data.images[0]}
+                alt={data.product_name}
+              />
+            </div>
+            <ProductDetails details={data.features.details} isNew={isNew} />
+          </div>
+          <div>
+            <span className="block text-gray-500 text-sm mb-2">
+              {isNew ? "New" : "Used"} | {sold} solded
+            </span>
+            <h1 className="text-xl lg:text-2xl font-semibold leading-7 lg:leading-6 text-gray-800 mb-4">
+              {data.product_name}
+            </h1>
+            <div className="flex items-center gap-2 mb-4">
+              <ProductRating rating={rating} />
+              {sold > 300 && <Badge text="most sales" />}
+              {isNew && <Badge text="New" color="bg-purple-500" />}
+            </div>
+            <PriceDetails price={data.price} />
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              <BuyButton text="Buy now" />
+              {!state.cart.find((p) => p.id === data.id) ? (
+                <BuyButton
+                  text="Add to cart"
+                  onClick={() => {
+                    dispatch({ type: "ADD_TO_CART", payload: data })
+                  }}
+                  isGhost
+                />
+              ) : (
+                <BuyButton
+                  text="Remove from cart"
+                  onClick={() => {
+                    dispatch({ type: "REMOVE_FROM_CART", payload: data })
+                  }}
+                  isGhost
+                />
+              )}
+            </div>
+            <ProductInformation
+              description={data.description}
+              deliveryAvailable={hasDelivery}
+            />
+            <ShareProduct id={data.id} />
+          </div>
+        </div>
+      </section>
+      <RelatedProducts />
     </div>
   )
 }
+
+export default Product

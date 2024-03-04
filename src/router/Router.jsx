@@ -11,6 +11,7 @@ import Admin from "../components/templates/Admin"
 import { Sales } from "../components/pages/admin/Sales"
 import { Product } from "../components/pages/Product"
 import Cart from "../components/pages/Cart"
+import Payment from "../components/pages/Payment"
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/payment-success",
+        element: <Payment />,
       },
     ],
   },
