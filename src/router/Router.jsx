@@ -12,6 +12,7 @@ import { Sales } from "../components/pages/admin/Sales"
 import { Product } from "../components/pages/Product"
 import Cart from "../components/pages/Cart"
 import Payment from "../components/pages/Payment"
+import Profile from "../components/pages/Profile"
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/payment-success",
         element: <Payment />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },

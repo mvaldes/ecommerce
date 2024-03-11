@@ -50,6 +50,11 @@ export const MainMenu = () => {
               </li>
             )}
             <li className="flex items-center">
+              <Link className="menu-item" to="/profile">
+                My profile
+              </Link>
+            </li>
+            <li className="flex items-center">
               <a
                 onClick={handleSession}
                 className="menu-item cursor-pointer"
